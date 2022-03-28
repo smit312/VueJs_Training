@@ -4,7 +4,6 @@ export default {
   name: "GalleryCard",
   data() {
     return {
-      show: true,
       data: jsonData,
     };
   },
@@ -64,3 +63,5 @@ export default {
 </template>
 
 
+<style scoped>
+</style>

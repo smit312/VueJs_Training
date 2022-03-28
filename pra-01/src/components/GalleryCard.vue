@@ -7,7 +7,6 @@ export default {
       data: jsonData,
     };
   },
-
   methods: {
     carPrice(details) {
       alert(`Price :  ${details}`);

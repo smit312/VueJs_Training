@@ -9,13 +9,12 @@ export default {
   },
 
   methods: {
-    hello(details) {
+    carPrice(details) {
       alert(`Price :  ${details}`);
     },
   },
 };
 </script>
-
 
 <template>
   <div>
@@ -50,7 +49,7 @@ export default {
                   href="#"
                   variant="primary"
                   class="text-center mt-3"
-                  @click="hello(item.price)"
+                  @click="carPrice(item.price)"
                   >Info
                 </b-button>
               </b-card>
@@ -61,7 +60,3 @@ export default {
     </b-container>
   </div>
 </template>
-
-
-<style scoped>
-</style>

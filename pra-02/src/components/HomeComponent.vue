@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container">
     <NavBar />
     <div
       class="row p-5"
@@ -12,7 +12,7 @@
         :carImage="car.image"
         :cardetails="car.details"
         :price="car.price"
-        @CarPrice="CarPrice"
+        @showCarPrice="showCarPrice"
       />
     </div>
   </div>
@@ -34,7 +34,7 @@ export default {
     };
   },
   methods: {
-    CarPrice(price) {
+    showCarPrice(price) {
       alert(`Car Price : ${price}`);
     },
   },

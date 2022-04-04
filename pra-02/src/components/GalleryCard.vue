@@ -7,7 +7,7 @@ export default {
 
 <template>
   <div
-    class="col-md-3 d-flex justify-between-center user-select-none"
+    class="col-md-4 d-flex justify-between-center user-select-none"
     style="margin: 0"
   >
     <b-card
@@ -35,7 +35,7 @@ export default {
           mb-3
           button-center
         "
-        @click="$emit('CarPrice', price)"
+        @click="$emit('showCarPrice', price)"
         v-if="price != null"
       >
         Info

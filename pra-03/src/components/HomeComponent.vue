@@ -20,9 +20,7 @@
         id="modal-prevent-closing"
         ref="modal"
         title="Enter car Detail"
-        @show="resetModal"
-        @hidden="resetModal"
-        @ok="handleOk"
+        hide-footer="true"
       >
         <ValidationObserver ref="observer">
           <b-form
@@ -39,49 +37,58 @@
               >
                 <b-form-input
                   id="name-input"
-                  v-model="CarName"
+                  v-model="carItem.carName"
                   type="text"
                   :state="errors[0] ? false : valid ? true : null"
                   placeholder="Enter car name"
                 ></b-form-input>
+                <b-form-invalid-feedback>
+                  {{ errors[0] }}
+                </b-form-invalid-feedback>
               </b-form-group>
             </ValidationProvider>
             <!-- ------------------------------ -->
             <ValidationProvider
-              rules="required|min:3|max:120 "
+              rules="required|min:30|max:120 "
               name="carDetails"
             >
               <b-form-group
                 label="CarDetails"
                 label-for="detail-input"
-                invalid-feedback="Details between 3 to 130 character"
+                invalid-feedback="Details between 30 to 130 character"
+                slot-scope="{ valid, errors }"
                 :state="nameState"
               >
                 <b-form-textarea
                   id="detail-input"
-                  v-model="CarDetails"
-                  :state="nameState"
-                  maxlength="120"
-                  minlength="30"
+                  v-model="carItem.carDetails"
+                  :state="errors[0] ? false : valid ? true : null"
                   required
                 ></b-form-textarea>
+                <b-form-invalid-feedback>
+                  {{ errors[0] }}
+                </b-form-invalid-feedback>
               </b-form-group>
             </ValidationProvider>
             <!-- ------------------------------ -->
-            <ValidationProvider rules="required|" name="carImgURL">
+            <ValidationProvider rules="required" name="carImgURL">
               <b-form-group
                 label="ImageURL"
                 label-for="url-input"
                 invalid-feedback="Must be url"
                 :state="nameState"
+                slot-scope="{ valid, errors }"
               >
                 <b-form-input
                   id="url-input"
-                  v-model="ImageURL"
-                  :state="nameState"
+                  v-model="carItem.carImgURL"
+                  :state="errors[0] ? false : valid ? true : null"
                   type="url"
                   required
                 ></b-form-input>
+                <b-form-invalid-feedback>
+                  {{ errors[0] }}
+                </b-form-invalid-feedback>
               </b-form-group>
             </ValidationProvider>
             <!-- ------------------------------ -->
@@ -91,15 +98,17 @@
                 label-for="Price"
                 invalid-feedback="Name is required"
                 :state="nameState"
+                slot-scope="{ valid, errors }"
               >
                 <b-form-input
                   id="Price"
-                  v-model="Price"
-                  :state="nameState"
+                  v-model="carItem.carPrice"
+                  :state="errors[0] ? false : valid ? true : null"
                   required
                 ></b-form-input>
               </b-form-group>
             </ValidationProvider>
+            <b-button block type="submit" variant="primary">Submit</b-button>
           </b-form>
         </ValidationObserver>
       </b-modal>
@@ -118,11 +127,17 @@ export default {
     NavBar,
     GalleryCard,
   },
+  props: ["modalId"],
   data() {
     return {
+      carItem: {
+        carName: "",
+        carDetails: "",
+        carImgURL: "",
+        carPrice: "",
+      },
       cars: CarData,
-      name: "",
-      nameState: null,
+      formModalId: this.modalId,
       submittedNames: [],
     };
   },
@@ -131,34 +146,41 @@ export default {
     CarPrice(price) {
       alert(`Car Price : ${price}`);
     },
-    checkFormValidity() {
-      const valid = this.$refs.form.checkValidity();
-      this.nameState = valid;
-      console.log(this.name);
-      return valid;
-    },
+
+    // checkFormValidity() {
+    //   const valid = this.$refs.form.checkValidity();
+    //   this.nameState = valid;
+    //   console.log(this.name);
+    //   return valid;
+    // },
     resetModal() {
       this.name = "";
       this.nameState = null;
     },
-    handleOk(bvModalEvt) {
-      // Prevent modal from closing
-      bvModalEvt.preventDefault();
-      // Trigger submit handler
-      this.handleSubmit();
-    },
+    // handleOk(bvModalEvt) {
+    //   // Prevent modal from closing
+    //   bvModalEvt.preventDefault();
+    //   // Trigger submit handler
+    //   this.handleSubmit();
+    // },
     handleSubmit() {
       // Exit when the form isn't valid
-      if (!this.checkFormValidity()) {
-        return;
-      }
-      // Push the name to submitted names
+      console.log(this.carItem);
+      this.$bvModal.hide("modal-prevent-closing");
+      this.$root.$emit("form-data", this.carItem);
       this.submittedNames.push(this.name);
-      // Hide the modal manually
       this.$nextTick(() => {
         this.$bvModal.hide("modal-prevent-closing");
       });
     },
+    // Push the name to submitted names
+    // this.submittedNames.push(this.name);
+    // console.log(this.name);
+    // // Hide the modal manually
+    // this.$nextTick(() => {
+    //   this.$bvModal.hide("modal-prevent-closing");
+    //     });
+    //   },
   },
 };
 </script>

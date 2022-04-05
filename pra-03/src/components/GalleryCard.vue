@@ -1,7 +1,12 @@
 <script>
 export default {
   name: "GalleryCard",
-  props: ["carTitle", "carImage", "cardetails", "price"],
+  props: ["cardId", "carTitle", "carImage", "cardetails", "price"],
+  methods: {
+    showDeleteCar: function () {
+      alert(`Delete car sucessfully`);
+    },
+  },
 };
 </script>
 
@@ -24,6 +29,25 @@ export default {
       ></b-img>
       <b-card-title class="text-center"></b-card-title>
       <b-card-text class="mt-4 mb-5">{{ cardetails }}</b-card-text>
+      <!-- <div> -->
+      <b-button
+        v-on:click="showDeleteCar()"
+        style="background-color: #1f2a48"
+        class="
+          shadow-lg
+          border-none
+          position-absolute
+          bottom-0
+          start-0
+          ms-5
+          mb-3
+          mr-2
+          button-center
+        "
+        v-if="price != null"
+      >
+        delete
+      </b-button>
       <b-button
         style="background-color: #1f2a48"
         class="
@@ -31,9 +55,7 @@ export default {
           border-none
           position-absolute
           bottom-0
-          left-50
-          mb-3
-          button-center
+          translate-middle
         "
         @click="$emit('CarPrice', price)"
         v-if="price != null"
@@ -47,7 +69,7 @@ export default {
           border-none
           position-absolute
           bottom-0
-          left-50
+          ms-1
           mb-3
           button-center
         "
@@ -56,6 +78,14 @@ export default {
       >
         available soon...
       </b-button>
+      <b-button
+        style="background-color: #1f2a48"
+        class="shadow-lg border-none position-absolute bottom-0 end-0 mb-3 me-2"
+        v-if="price != null"
+      >
+        edit
+      </b-button>
+      <!-- </div> -->
     </b-card>
   </div>
 </template>

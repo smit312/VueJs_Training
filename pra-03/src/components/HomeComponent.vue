@@ -123,10 +123,10 @@ export default {
       cars: CarData,
       name: "",
       nameState: null,
-
       submittedNames: [],
     };
   },
+
   methods: {
     CarPrice(price) {
       alert(`Car Price : ${price}`);
@@ -134,6 +134,7 @@ export default {
     checkFormValidity() {
       const valid = this.$refs.form.checkValidity();
       this.nameState = valid;
+      console.log(this.name);
       return valid;
     },
     resetModal() {

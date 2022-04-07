@@ -11,25 +11,30 @@ export default {
 </script>
 
 <template>
-  <div
-    class="col-md-3 d-flex justify-between-center user-select-none"
-    style="margin: 0"
+  <b-col
+    cols="3"
+    class="
+      d-flex
+      align-items-stretch
+      ms-5
+      me-2
+      justify-between-center
+      user-select-none
+    "
   >
     <b-card
-      class="mt-5 shadow p-3 mb-3 rounded position-relative"
+      class="mt-5 shadow mb-3 rounded"
       header-tag="header"
-      style="background-color: #1f2a48"
+      style="background-color: #1f2a48; max-width: 100em"
       align="center"
       :title="carTitle"
     >
       <b-img
-        style="width: auto; height: 10rem"
+        style="width: 250px; height: 10rem"
         :src="carImage"
         alt="Fluid-grow image"
       ></b-img>
-      <b-card-title class="text-center"></b-card-title>
       <b-card-text class="mt-4 mb-5">{{ cardetails }}</b-card-text>
-      <!-- <div> -->
       <b-button
         v-on:click="showDeleteCar()"
         style="background-color: #1f2a48"
@@ -80,14 +85,16 @@ export default {
       </b-button>
       <b-button
         style="background-color: #1f2a48"
+        v-b-modal.modal-prevent-closing
         class="shadow-lg border-none position-absolute bottom-0 end-0 mb-3 me-2"
+        v-b-modal="'modal-prevent-closing' + cardId"
+        @click="$emit('editCard')"
         v-if="price != null"
       >
         edit
       </b-button>
-      <!-- </div> -->
     </b-card>
-  </div>
+  </b-col>
 </template>
 <style>
 .button-center {

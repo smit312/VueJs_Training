@@ -5,6 +5,12 @@
   >
     <h1 class="text-center text-light">
       {{ showRoomName }}
+      <b-button
+        v-b-modal.modal-prevent-closing
+        style="background-color: #1f2a48"
+        class="shadow-lg border-none bottom-0 start-0 ms-5 button-center"
+        >Add Car</b-button
+      >
     </h1>
   </header>
 </template>

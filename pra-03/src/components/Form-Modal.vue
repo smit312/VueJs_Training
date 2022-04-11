@@ -9,7 +9,11 @@
       @ok="handleOk"
       hide-footer="true"
     >
-      <CarForm modalId="modal-prevent-closing" :formData="this.formData" />
+      <CarForm
+        modalId="modal-prevent-closing"
+        :formData="$props"
+        v-on="$listeners"
+      />
     </b-modal>
   </div>
 </template>

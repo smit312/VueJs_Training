@@ -93,11 +93,11 @@ export default {
   data() {
     return {
       carItem: {
-        carId: this.formData.carId,
-        carName: this.formData.carName,
-        carDetails: this.formData.carDetails,
-        carImgURL: this.formData.carImgURL,
-        carPrice: this.formData.carPrice,
+        carId: this.formData.formData.carId || "",
+        carName: this.formData.formData.carName || "",
+        carDetails: this.formData.formData.carDetails || "",
+        carImgURL: this.formData.formData.carImgURL || "",
+        carPrice: this.formData.formData.carPrice || "",
       },
       formModalId: this.modalId,
     };
@@ -106,7 +106,7 @@ export default {
     handleSubmit() {
       // Exit when the form isn't valid
       console.log(this.carItem);
-      this.$root.$emit("form-data", this.carItem);
+      this.$emit("submittedFormData", this.carItem);
       this.$bvModal.hide(this.formModalId);
       this.$nextTick(() => {
         this.$bvModal.hide("modal-prevent-closing");

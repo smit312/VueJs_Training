@@ -23,11 +23,11 @@ export default {
     "
   >
     <b-card
+      :title="carTitle"
       class="mt-5 shadow mb-3 rounded"
       header-tag="header"
       style="background-color: #1f2a48; max-width: 100em"
       align="center"
-      :title="carTitle"
     >
       <b-img
         style="width: 250px; height: 10rem"

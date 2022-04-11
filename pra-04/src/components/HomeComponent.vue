@@ -26,7 +26,7 @@
 import NavBar from "./Navbar.vue";
 import GalleryCard from "./GalleryCard.vue";
 import FormModal from "./Form-Modal.vue";
-import CarData from "../assets/Data/CarData.json";
+import axios from "axios";
 export default {
   name: "HomeComponent",
   components: {
@@ -37,7 +37,7 @@ export default {
   props: ["modalId"],
   data() {
     return {
-      cars: CarData,
+      cars: [],
       formModalId: this.modalId,
       selectedCardData: {
         carId: "",
@@ -68,54 +68,67 @@ export default {
     },
     handleSubmittedData(carItem) {
       if (carItem.carId !== "") {
-        let id = carItem.carId;
-        let i = this.cars.findIndex((item) => item.id === id);
-        this.cars[i].heading = carItem.carName;
-        this.cars[i].image = carItem.carImgURL;
-        this.cars[i].details = carItem.carDetails;
-        this.cars[i].price = carItem.carPrice;
-        this.selectedCardData.carId = "";
-        (this.selectedCardData.carName = ""),
-          (this.selectedCardData.carDetails = ""),
-          (this.selectedCardData.carPrice = ""),
-          (this.selectedCardData.carImgURL = "");
+        this.updateCarData(carItem);
+        this.getData();
       } else {
-        let carsItem = {
-          id: Math.random().toString(),
-          heading: carItem.carName,
-          image: carItem.carImgURL,
-          details: carItem.carDetails,
-          price: carItem.carPrice,
-        };
-        this.cars.push(carsItem);
+        this.addcarData(carItem);
+        this.getData();
       }
     },
+    addcarData(data) {
+      axios
+        .post(`https://testapi.io/api/dartya/resource/cardata`, {
+          name: data.carName,
+          details: data.carDetails,
+          image: data.carImgURL,
+          price: data.carPrice,
+        })
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    getData() {
+      axios
+        .get(`https://testapi.io/api/dartya/resource/cardata`)
+        .then((res) => {
+          this.formatFetchedData(res.data.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    formatFetchedData(data) {
+      this.cars = data.map((item) => {
+        return {
+          id: item.id,
+          heading: item.name,
+          image: item.image,
+          details: item.details,
+          price: item.price,
+        };
+      });
+    },
+    updateCarData(data) {
+      axios
+        .put(`https://testapi.io/api/dartya/resource/cardata/${data.carId}`, {
+          name: data.carName,
+          details: data.carDetails,
+          image: data.carImgURL,
+          price: data.CarPrice,
+        })
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
   },
-  // mounted() {
-  //   this.$root.$on("form-data", (carItem) => {
-  //     if (carItem.carId !== "") {
-  //       let id = carItem.carId;
-  //       let i = this.cars.findIndex((item) => item.id === id);
-  //       this.cars[i].heading = carItem.carName;
-  //       this.cars[i].image = carItem.carImgURL;
-  //       this.cars[i].details = carItem.carDetails;
-  //       this.cars[i].price = carItem.carPrice;
-  //       this.selectedCardData.carId = "";
-  //       (this.selectedCardData.carName = ""),
-  //         (this.selectedCardData.carDetails = ""),
-  //         (this.selectedCardData.carPrice = ""),
-  //         (this.selectedCardData.carImgURL = "");
-  //     } else {
-  //       let carsItem = {
-  //         id: Math.random().toString(),
-  //         heading: carItem.carName,
-  //         image: carItem.carImgURL,
-  //         details: carItem.carDetails,
-  //         price: carItem.carPrice,
-  //       };
-  //       this.cars.push(carsItem);
-  //     }
-  //   });
-  // },
+  mounted() {
+    this.getData();
+  },
 };
 </script>

@@ -67,22 +67,22 @@ export default {
       this.$bvModal.show("modal-prevent-closing");
       console.log(car);
     },
-    deleteCard(data) {
-      this.deleteCarData(data);
+    async deleteCard(data) {
+      await this.deleteCarData(data);
+      await this.getData();
       alert("Deleted : " + data.heading);
-      this.getCarData();
     },
-    handleSubmittedData(carItem) {
+    async handleSubmittedData(carItem) {
       if (carItem.carId !== "") {
-        this.updateCarData(carItem);
-        this.getData();
+        await this.updateCarData(carItem);
+        await this.getData();
       } else {
-        this.addcarData(carItem);
-        this.getData();
+        await this.addcarData(carItem);
+        await this.getData();
       }
     },
-    addcarData(data) {
-      axios
+    async addcarData(data) {
+      await axios
         .post(`https://testapi.io/api/dartya/resource/cardata`, {
           name: data.carName,
           details: data.carDetails,
@@ -94,16 +94,19 @@ export default {
         })
         .catch((err) => {
           console.log(err);
+          alert(err);
         });
     },
-    getData() {
-      axios
+    async getData() {
+      console.log("called");
+      await axios
         .get(`https://testapi.io/api/dartya/resource/cardata`)
         .then((res) => {
           this.formatFetchedData(res.data.data);
         })
         .catch((err) => {
           console.log(err);
+          alert(err);
         });
     },
     formatFetchedData(data) {
@@ -117,8 +120,8 @@ export default {
         };
       });
     },
-    updateCarData(data) {
-      axios
+    async updateCarData(data) {
+      await axios
         .put(`https://testapi.io/api/dartya/resource/cardata/${data.carId}`, {
           name: data.carName,
           details: data.carDetails,
@@ -130,17 +133,18 @@ export default {
         })
         .catch((err) => {
           console.log(err);
+          alert(err);
         });
     },
-    deleteCarData(data) {
-      axios
+    async deleteCarData(data) {
+      await axios
         .delete(`https://testapi.io/api/dartya/resource/cardata/${data.id}`)
         .then((res) => {
           console.log(res);
-          this.$forceUpdate();
         })
-        .catch((e) => {
-          console.log(e);
+        .catch((err) => {
+          console.log(err);
+          alert(err);
         });
     },
   },

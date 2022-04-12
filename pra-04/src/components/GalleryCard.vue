@@ -2,11 +2,11 @@
 export default {
   name: "GalleryCard",
   props: ["cardId", "carTitle", "carImage", "cardetails", "price"],
-  methods: {
-    showDeleteCar: function () {
-      alert(`Delete car sucessfully`);
-    },
-  },
+  // methods: {
+  //   showDeleteCar: function () {
+  //     alert(`Delete car sucessfully`);
+  //   },
+  // },
 };
 </script>
 
@@ -36,7 +36,6 @@ export default {
       ></b-img>
       <b-card-text class="mt-4 mb-5">{{ cardetails }}</b-card-text>
       <b-button
-        v-on:click="showDeleteCar()"
         style="background-color: #1f2a48"
         class="
           shadow-lg
@@ -49,6 +48,8 @@ export default {
           mr-2
           button-center
         "
+        v-b-modal="'modal-prevent-closing-' + cardId"
+        @click="$emit('deleteCard')"
         v-if="price != null"
       >
         delete

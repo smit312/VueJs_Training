@@ -12,6 +12,7 @@
         :price="car.price"
         @CarPrice="CarPrice"
         @editCard="editCard(car)"
+        @deleteCard="deleteCard(car)"
       />
 
       <FormModal
@@ -66,6 +67,11 @@ export default {
       this.$bvModal.show("modal-prevent-closing");
       console.log(car);
     },
+    deleteCard(data) {
+      this.deleteCarData(data);
+      alert("Deleted : " + data.heading);
+      this.getCarData();
+    },
     handleSubmittedData(carItem) {
       if (carItem.carId !== "") {
         this.updateCarData(carItem);
@@ -117,13 +123,24 @@ export default {
           name: data.carName,
           details: data.carDetails,
           image: data.carImgURL,
-          price: data.CarPrice,
+          price: data.carPrice,
         })
         .then((res) => {
           console.log(res);
         })
         .catch((err) => {
           console.log(err);
+        });
+    },
+    deleteCarData(data) {
+      axios
+        .delete(`https://testapi.io/api/dartya/resource/cardata/${data.id}`)
+        .then((res) => {
+          console.log(res);
+          this.$forceUpdate();
+        })
+        .catch((e) => {
+          console.log(e);
         });
     },
   },

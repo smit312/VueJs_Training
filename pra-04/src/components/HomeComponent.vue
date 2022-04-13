@@ -1,6 +1,15 @@
 <template>
   <div class="container">
     <NavBar />
+    <div>
+      <alert-box
+        v-if="this.isLoading == false && this.successmsg !== ''"
+        variant="success"
+        content="successfully!"
+        show="true"
+      />
+      <alert-box v-else-if="this.isLoading == false && this" variant="danger" content="error!" show="true" />
+    </div>
     <b-row class>
       <GalleryCard
         v-for="car in cars"
@@ -28,12 +37,14 @@ import NavBar from "./Navbar.vue";
 import GalleryCard from "./GalleryCard.vue";
 import FormModal from "./Form-Modal.vue";
 import axios from "axios";
+import AlertBox from "./AlertBox.vue";
 export default {
   name: "HomeComponent",
   components: {
     NavBar,
     GalleryCard,
     FormModal,
+    AlertBox,
   },
   props: ["modalId"],
   data() {
@@ -48,6 +59,9 @@ export default {
         carImgURL: "",
       },
       submittedNames: [],
+      isLoading: false,
+      errmsg: "",
+      successmsg: "",
     };
   },
 
@@ -70,7 +84,8 @@ export default {
     async deleteCard(data) {
       await this.deleteCarData(data);
       await this.getData();
-      alert("Deleted : " + data.heading);
+      // alert("Deleted : " + data.heading);
+      //
     },
     async handleSubmittedData(carItem) {
       if (carItem.carId !== "") {
@@ -91,6 +106,7 @@ export default {
         })
         .then((res) => {
           console.log(res);
+          this.showAlert();
         })
         .catch((err) => {
           console.log(err);
@@ -98,7 +114,6 @@ export default {
         });
     },
     async getData() {
-      console.log("called");
       await axios
         .get(`https://testapi.io/api/dartya/resource/cardata`)
         .then((res) => {
@@ -144,8 +159,13 @@ export default {
         })
         .catch((err) => {
           console.log(err);
-          alert(err);
         });
+    },
+    countDownChanged(dismissCountDown) {
+      this.dismissCountDown = dismissCountDown;
+    },
+    showAlert() {
+      this.dismissCountDown = this.dismissSecs;
     },
   },
   mounted() {

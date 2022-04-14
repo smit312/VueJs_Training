@@ -5,10 +5,15 @@
       <alert-box
         v-if="this.isLoading == false && this.successmsg !== ''"
         variant="success"
-        content="successfully!"
         show="true"
+        :content="this.successmsg"
       />
-      <alert-box v-else-if="this.isLoading == false && this" variant="danger" content="error!" show="true" />
+      <alert-box
+        v-else-if="this.isLoading == false && this.errmsg !== ''"
+        variant="danger"
+        show="true"
+        :content="this.errmsg"
+      />
     </div>
     <b-row class>
       <GalleryCard
@@ -49,6 +54,7 @@ export default {
   props: ["modalId"],
   data() {
     return {
+      dismissSecs: 5,
       cars: [],
       formModalId: this.modalId,
       selectedCardData: {
@@ -97,6 +103,7 @@ export default {
       }
     },
     async addcarData(data) {
+      this.isLoading = true;
       await axios
         .post(`https://testapi.io/api/dartya/resource/cardata`, {
           name: data.carName,
@@ -106,11 +113,14 @@ export default {
         })
         .then((res) => {
           console.log(res);
+          this.isLoading = false;
+          this.successmsg = "car data added successfully!";
           this.showAlert();
         })
         .catch((err) => {
           console.log(err);
-          alert(err);
+          this.isLoading = false;
+          this.errmsg = "oops! somthing went wrong";
         });
     },
     async getData() {
@@ -136,6 +146,7 @@ export default {
       });
     },
     async updateCarData(data) {
+      this.isLoading = true;
       await axios
         .put(`https://testapi.io/api/dartya/resource/cardata/${data.carId}`, {
           name: data.carName,
@@ -145,20 +156,27 @@ export default {
         })
         .then((res) => {
           console.log(res);
+          this.isLoading = false;
+          this.successmsg = "car data updated successfully";
         })
         .catch((err) => {
           console.log(err);
-          alert(err);
+          this.errmsg = "oops! somthing went wrong";
+          // alert(err);
         });
     },
     async deleteCarData(data) {
+      this.isLoading = true;
       await axios
         .delete(`https://testapi.io/api/dartya/resource/cardata/${data.id}`)
         .then((res) => {
           console.log(res);
+          this.isLoading = false;
+          this.successmsg = "car data delete successfully";
         })
         .catch((err) => {
           console.log(err);
+          this.errmsg = "oops! somthing went wrong";
         });
     },
     countDownChanged(dismissCountDown) {

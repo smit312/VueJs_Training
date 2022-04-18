@@ -91,31 +91,5 @@ export default {
       }
     },
   },
-  // mounted() {
-  //   this.$root.$on("form-data", (carItem) => {
-  //     if (carItem.carId !== "") {
-  //       let id = carItem.carId;
-  //       let i = this.cars.findIndex((item) => item.id === id);
-  //       this.cars[i].heading = carItem.carName;
-  //       this.cars[i].image = carItem.carImgURL;
-  //       this.cars[i].details = carItem.carDetails;
-  //       this.cars[i].price = carItem.carPrice;
-  //       this.selectedCardData.carId = "";
-  //       (this.selectedCardData.carName = ""),
-  //         (this.selectedCardData.carDetails = ""),
-  //         (this.selectedCardData.carPrice = ""),
-  //         (this.selectedCardData.carImgURL = "");
-  //     } else {
-  //       let carsItem = {
-  //         id: Math.random().toString(),
-  //         heading: carItem.carName,
-  //         image: carItem.carImgURL,
-  //         details: carItem.carDetails,
-  //         price: carItem.carPrice,
-  //       };
-  //       this.cars.push(carsItem);
-  //     }
-  //   });
-  // },
 };
 </script>

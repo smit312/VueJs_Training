@@ -24,7 +24,6 @@
           </b-form-invalid-feedback>
         </b-form-group>
       </ValidationProvider>
-      <!-- ------------------------------ -->
       <ValidationProvider rules="required|min:30|max:120 " name="carDetails">
         <b-form-group
           label="CarDetails"
@@ -44,7 +43,6 @@
           </b-form-invalid-feedback>
         </b-form-group>
       </ValidationProvider>
-      <!-- ------------------------------ -->
       <ValidationProvider rules="required" name="carImgURL">
         <b-form-group
           label="ImageURL"
@@ -65,7 +63,6 @@
           </b-form-invalid-feedback>
         </b-form-group>
       </ValidationProvider>
-      <!-- ------------------------------ -->
       <ValidationProvider rules="required|integer" name="carPrice">
         <b-form-group
           label="Price"

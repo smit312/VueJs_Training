@@ -43,7 +43,14 @@
           </b-form-invalid-feedback>
         </b-form-group>
       </ValidationProvider>
-      <ValidationProvider rules="required" name="carImgURL">
+      <ValidationProvider
+        :rules="{
+          required: true,
+          regex:
+            /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$/,
+        }"
+        name="carImgURL"
+      >
         <b-form-group
           label="ImageURL"
           label-for="url-input"
@@ -67,7 +74,7 @@
         <b-form-group
           label="Price"
           label-for="Price"
-          invalid-feedback="Name is required"
+          invalid-feedback="Price is required"
           :state="nameState"
           slot-scope="{ valid, errors }"
         >

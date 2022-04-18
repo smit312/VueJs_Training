@@ -85,7 +85,7 @@
       <b-button block type="submit" variant="primary">Submit</b-button>
     </b-form>
   </ValidationObserver>
-</template>
+</template>                    
 <script>
 export default {
   name: "CarForm",

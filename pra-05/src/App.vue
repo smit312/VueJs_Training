@@ -2,7 +2,6 @@
   <div style="background-color: #141c2f; color: white">
     <Homecomponent />
     <hr />
-    <router-view> </router-view>
   </div>
 </template>
 

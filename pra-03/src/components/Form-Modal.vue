@@ -4,10 +4,8 @@
       id="modal-prevent-closing"
       ref="modal"
       title="Enter car Detail"
-      @show="resetModal"
-      @hidden="resetModal"
-      @ok="handleOk"
       hide-footer="true"
+      @hide="onHideHandler"
     >
       <CarForm
         modalId="modal-prevent-closing"
@@ -28,6 +26,17 @@ export default {
     return {
       name: "FormModal",
     };
+  },
+  methods: {
+    onHideHandler() {
+      this.$parent.selectedCardData = {
+        carId: "",
+        carTitle: "",
+        cardetails: "",
+        carPrice: "",
+        carImage: "",
+      };
+    },
   },
 };
 </script>

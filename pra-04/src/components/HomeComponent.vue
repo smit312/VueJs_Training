@@ -83,15 +83,11 @@ export default {
         carPrice: car.price,
         carImgURL: car.image,
       };
-
       this.$bvModal.show("modal-prevent-closing");
-      console.log(car);
     },
     async deleteCard(data) {
       await this.deleteCarData(data);
       await this.getData();
-      // alert("Deleted : " + data.heading);
-      //
     },
     async handleSubmittedData(carItem) {
       if (carItem.carId !== "") {
@@ -162,7 +158,6 @@ export default {
         .catch((err) => {
           console.log(err);
           this.errmsg = "oops! somthing went wrong";
-          // alert(err);
         });
     },
     async deleteCarData(data) {

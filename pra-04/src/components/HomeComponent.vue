@@ -122,12 +122,14 @@ export default {
     async getData() {
       await axios
         .get(`https://testapi.io/api/dartya/resource/cardata`)
+
         .then((res) => {
-          this.formatFetchedData(res.data.data);
+          if (res && res.data != null && res.data.data !== undefined)
+            this.formatFetchedData(res.data.data);
         })
         .catch((err) => {
           console.log(err);
-          alert(err);
+          this.showAlert();
         });
     },
     formatFetchedData(data) {

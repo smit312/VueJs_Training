@@ -107,14 +107,12 @@ export default {
           image: data.carImgURL,
           price: data.carPrice,
         })
-        .then((res) => {
-          console.log(res);
+        .then(() => {
           this.isLoading = false;
           this.successmsg = "car data added successfully!";
           this.showAlert();
         })
-        .catch((err) => {
-          console.log(err);
+        .catch(() => {
           this.isLoading = false;
           this.errmsg = "oops! somthing went wrong";
         });
@@ -124,11 +122,10 @@ export default {
         .get(`https://testapi.io/api/dartya/resource/cardata`)
 
         .then((res) => {
-          if (res && res.data != null && res.data.data !== undefined)
+          if (res && res.data && res.data.data)
             this.formatFetchedData(res.data.data);
         })
-        .catch((err) => {
-          console.log(err);
+        .catch(() => {
           this.showAlert();
         });
     },
@@ -152,13 +149,11 @@ export default {
           image: data.carImgURL,
           price: data.carPrice,
         })
-        .then((res) => {
-          console.log(res);
+        .then(() => {
           this.isLoading = false;
           this.successmsg = "car data updated successfully";
         })
-        .catch((err) => {
-          console.log(err);
+        .catch(() => {
           this.errmsg = "oops! somthing went wrong";
         });
     },
@@ -166,13 +161,11 @@ export default {
       this.isLoading = true;
       await axios
         .delete(`https://testapi.io/api/dartya/resource/cardata/${data.id}`)
-        .then((res) => {
-          console.log(res);
+        .then(() => {
           this.isLoading = false;
           this.successmsg = "car data delete successfully";
         })
-        .catch((err) => {
-          console.log(err);
+        .catch(() => {
           this.errmsg = "oops! somthing went wrong";
         });
     },

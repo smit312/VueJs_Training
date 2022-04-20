@@ -1,4 +1,4 @@
-# pra-05
+# prac-05
 
 ## Project setup
 ```

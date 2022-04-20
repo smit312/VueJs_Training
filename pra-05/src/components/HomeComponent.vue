@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <NavBar />
+    <!-- <NavBar /> -->
     <b-row class>
       <GalleryCard
         v-for="car in cars"
@@ -24,14 +24,15 @@
 </template>
 
 <script>
-import NavBar from "./Navbar.vue";
+// import NavBar from "./Navbar.vue";
+
 import GalleryCard from "./GalleryCard.vue";
 import FormModal from "./Form-Modal.vue";
 import axios from "axios";
 export default {
   name: "HomeComponent",
   components: {
-    NavBar,
+    // NavBar,
     GalleryCard,
     FormModal,
   },

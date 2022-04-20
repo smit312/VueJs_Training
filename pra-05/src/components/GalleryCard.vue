@@ -2,11 +2,6 @@
 export default {
   name: "GalleryCard",
   props: ["cardId", "carTitle", "carImage", "cardetails", "price"],
-  // methods: {
-  //   showDeleteCar: function () {
-  //     alert(`Delete car sucessfully`);
-  //   },
-  // },
 };
 </script>
 

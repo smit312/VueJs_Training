@@ -1,6 +1,19 @@
 <template>
   <div class="container">
-    <!-- <NavBar /> -->
+    <div>
+      <AlertBox
+        v-if="this.isLoading == false && this.successmsg !== ''"
+        variant="success"
+        show="true"
+        :content="this.successmsg"
+      />
+      <AlertBox
+        v-else-if="this.isLoading == false && this.errmsg !== ''"
+        variant="danger"
+        show="true"
+        :content="this.errmsg"
+      />
+    </div>
     <b-row class>
       <GalleryCard
         v-for="car in cars"
@@ -10,7 +23,7 @@
         :carImage="car.image"
         :cardetails="car.details"
         :price="car.price"
-        @CarPrice="CarPrice"
+        @CarInfo="CarInfo"
         @editCard="editCard(car)"
         @deleteCard="deleteCard(car)"
       />
@@ -24,21 +37,21 @@
 </template>
 
 <script>
-// import NavBar from "./Navbar.vue";
-
 import GalleryCard from "./GalleryCard.vue";
 import FormModal from "./Form-Modal.vue";
 import axios from "axios";
+import AlertBox from "./AlertBox.vue";
 export default {
   name: "HomeComponent",
   components: {
-    // NavBar,
     GalleryCard,
     FormModal,
+    AlertBox,
   },
   props: ["modalId"],
   data() {
     return {
+      dismissSecs: 5,
       cars: [],
       formModalId: this.modalId,
       selectedCardData: {
@@ -49,12 +62,20 @@ export default {
         carImgURL: "",
       },
       submittedNames: [],
+      isLoading: false,
+      errmsg: "",
+      successmsg: "",
     };
   },
 
   methods: {
-    CarPrice(price) {
-      alert(`Car Price : ${price}`);
+    CarInfo(id) {
+      this.$router.push({
+        name: "cardetails",
+        params: {
+          carId: id,
+        },
+      });
     },
     editCard(car) {
       this.selectedCardData = {
@@ -64,14 +85,11 @@ export default {
         carPrice: car.price,
         carImgURL: car.image,
       };
-
       this.$bvModal.show("modal-prevent-closing");
-      console.log(car);
     },
     async deleteCard(data) {
       await this.deleteCarData(data);
       await this.getData();
-      alert("Deleted : " + data.heading);
     },
     async handleSubmittedData(carItem) {
       if (carItem.carId !== "") {
@@ -83,6 +101,7 @@ export default {
       }
     },
     async addcarData(data) {
+      this.isLoading = true;
       await axios
         .post(`https://testapi.io/api/dartya/resource/cardata`, {
           name: data.carName,
@@ -90,24 +109,26 @@ export default {
           image: data.carImgURL,
           price: data.carPrice,
         })
-        .then((res) => {
-          console.log(res);
+        .then(() => {
+          this.isLoading = false;
+          this.successmsg = "car data added successfully!";
+          this.showAlert();
         })
-        .catch((err) => {
-          console.log(err);
-          alert(err);
+        .catch(() => {
+          this.isLoading = false;
+          this.errmsg = "oops! somthing went wrong";
         });
     },
     async getData() {
-      console.log("called");
       await axios
         .get(`https://testapi.io/api/dartya/resource/cardata`)
+
         .then((res) => {
-          this.formatFetchedData(res.data.data);
+          if (res && res.data && res.data.data)
+            this.formatFetchedData(res.data.data);
         })
-        .catch((err) => {
-          console.log(err);
-          alert(err);
+        .catch(() => {
+          this.showAlert();
         });
     },
     formatFetchedData(data) {
@@ -122,6 +143,7 @@ export default {
       });
     },
     async updateCarData(data) {
+      this.isLoading = true;
       await axios
         .put(`https://testapi.io/api/dartya/resource/cardata/${data.carId}`, {
           name: data.carName,
@@ -129,24 +151,31 @@ export default {
           image: data.carImgURL,
           price: data.carPrice,
         })
-        .then((res) => {
-          console.log(res);
+        .then(() => {
+          this.isLoading = false;
+          this.successmsg = "car data updated successfully";
         })
-        .catch((err) => {
-          console.log(err);
-          alert(err);
+        .catch(() => {
+          this.errmsg = "oops! somthing went wrong";
         });
     },
     async deleteCarData(data) {
+      this.isLoading = true;
       await axios
         .delete(`https://testapi.io/api/dartya/resource/cardata/${data.id}`)
-        .then((res) => {
-          console.log(res);
+        .then(() => {
+          this.isLoading = false;
+          this.successmsg = "car data delete successfully";
         })
-        .catch((err) => {
-          console.log(err);
-          alert(err);
+        .catch(() => {
+          this.errmsg = "oops! somthing went wrong";
         });
+    },
+    countDownChanged(dismissCountDown) {
+      this.dismissCountDown = dismissCountDown;
+    },
+    showAlert() {
+      this.dismissCountDown = this.dismissSecs;
     },
   },
   mounted() {

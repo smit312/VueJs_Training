@@ -3,13 +3,19 @@
     <ValidationObserver ref="observer">
       <b-form @submit="onSubmit">
         <center>
+          <h1 class="mt-3">Register Page</h1>
           <AlertBox
-            v-if="this.isLoading === false && this.errorMsg !== ''"
+            v-if="this.isLoading === false && this.successmsg !== ''"
             showAlert="true"
             alertVariant="danger"
-            :alertMessage="this.errorMsg"
+            :alertMessage="this.successmsg"
           />
-          <h1 class="mt-3">Register Page</h1>
+          <AlertBox
+            v-else-if="this.isLoading == false && this.errmsg !== ''"
+            variant="danger"
+            show="true"
+            :content="this.errmsg"
+          />
           <ValidationProvider
             rules="required|alpha_spaces"
             name="name"
@@ -186,6 +192,7 @@ export default {
       },
       isLoading: false,
       errmsg: "",
+      successmsg: "",
     };
   },
   methods: {

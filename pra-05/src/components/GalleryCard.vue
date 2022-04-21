@@ -21,7 +21,7 @@ export default {
       :title="carTitle"
       class="mt-5 shadow mb-3 rounded"
       header-tag="header"
-      style="background-color: #1f2a48; max-width: 100em"
+      style="background-color: #ffffff; max-width: 100em"
       align="center"
     >
       <b-img
@@ -58,7 +58,7 @@ export default {
           bottom-0
           translate-middle
         "
-        @click="$emit('CarPrice', price)"
+        @click="$emit('CarInfo', cardId)"
         v-if="price != null"
       >
         Info

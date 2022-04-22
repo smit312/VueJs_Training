@@ -23,7 +23,7 @@
         </b-card-text>
         <b-card-text> price : {{ this.carData.price }} </b-card-text>
 
-        <b-button href="#" variant="primary">Back to homepage</b-button>
+        <b-button to="/" variant="primary">Back to homepage</b-button>
       </b-card>
     </div>
   </div>
@@ -51,7 +51,7 @@ export default {
     async getCarData(id) {
       this.isLoading = true;
       await axios
-        .get(`https://testapi.io/api/dartya/resource/cardat/${id}`)
+        .get(`https://testapi.io/api/dartya/resource/cardata/${id}`)
         .then((res) => {
           this.isLoading = false;
           if (res && res.data) {

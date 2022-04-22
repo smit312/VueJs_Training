@@ -71,9 +71,6 @@ export default {
           this.errmsg = "Oops, something went wrong!";
         });
     },
-    showAlert() {
-      this.dismissCountDown = this.dismissSecs;
-    },
   },
   created() {
     const id = this.$route.params.carId;

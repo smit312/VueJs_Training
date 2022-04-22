@@ -101,7 +101,6 @@ export default {
   },
   methods: {
     handleSubmit() {
-      console.log(this.carItem);
       this.$emit("submittedFormData", this.carItem);
       this.$bvModal.hide(this.formModalId);
       this.$nextTick(() => {

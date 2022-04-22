@@ -1,9 +1,8 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-// import HomeView from "../views/HomeView.vue";
-import HomeComponent from "../components/HomeComponent.vue";
-import UserLogin from "../components/UserLogin.vue";
-import UserRegister from "../components/UserRegister.vue";
+import HomeComponent from "../views/Home.vue";
+import UserLogin from "../views/UserLogin.vue";
+import UserRegister from "../views/UserRegister.vue";
 import carDetails from "../views/carDetails.vue";
 Vue.use(VueRouter);
 

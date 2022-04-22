@@ -71,17 +71,16 @@ export default {
       await axios
         .get("https://testapi.io/api/dartya/resource/users/1")
         .then((res) => {
-          console.log(res);
           if (res && res.data) {
             if (
               this.form.uEmail === res.data.email &&
               this.form.uPassword === res.data.password
             ) {
               this.auth = true;
-              this.$router.push("/cars");
+              this.$router.push("/");
             }
           }
-          console.log(res);
+
           console.log(this.auth);
         });
     },

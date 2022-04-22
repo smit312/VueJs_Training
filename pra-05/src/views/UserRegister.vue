@@ -165,7 +165,7 @@
 
 <script>
 import axios from "axios";
-import AlertBox from "./AlertBox.vue";
+import AlertBox from "../components/AlertBox.vue";
 export default {
   components: { AlertBox },
   data() {
@@ -198,7 +198,6 @@ export default {
   methods: {
     async onSubmit(event) {
       event.preventDefault();
-      // alert(JSON.stringify(this.form));
       let uDetails = {
         name: this.form.name,
         email: this.form.email,

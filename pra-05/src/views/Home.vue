@@ -37,10 +37,10 @@
 </template>
 
 <script>
-import GalleryCard from "./GalleryCard.vue";
-import FormModal from "./Form-Modal.vue";
+import GalleryCard from "../components/GalleryCard.vue";
+import FormModal from "../components/Form-Modal.vue";
 import axios from "axios";
-import AlertBox from "./AlertBox.vue";
+import AlertBox from "../components/AlertBox.vue";
 export default {
   name: "HomeComponent",
   components: {
@@ -51,7 +51,6 @@ export default {
   props: ["modalId"],
   data() {
     return {
-      dismissSecs: 5,
       cars: [],
       formModalId: this.modalId,
       selectedCardData: {
@@ -170,12 +169,6 @@ export default {
         .catch(() => {
           this.errmsg = "oops! somthing went wrong";
         });
-    },
-    countDownChanged(dismissCountDown) {
-      this.dismissCountDown = dismissCountDown;
-    },
-    showAlert() {
-      this.dismissCountDown = this.dismissSecs;
     },
   },
   mounted() {

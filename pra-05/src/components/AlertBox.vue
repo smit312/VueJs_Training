@@ -15,8 +15,5 @@
 export default {
   name: "AlertBox",
   props: ["variant", "content", "show"],
-  data() {
-    return {};
-  },
 };
 </script>

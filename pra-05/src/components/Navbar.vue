@@ -15,6 +15,13 @@
             class="shadow-lg border-none bottom-0 start-0 ms-5"
             >Add Car</b-button
           >
+          <router-link to="/">
+            <b-button
+              style="background-color: #1f2a48"
+              class="shadow-lg border-none bottom-0 start-0 ms-5"
+              >Home
+            </b-button></router-link
+          >
           <router-link to="/login">
             <b-button
               style="background-color: #1f2a48"

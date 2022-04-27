@@ -22,7 +22,6 @@
           {{ this.carData.details }}
         </b-card-text>
         <b-card-text> price : {{ this.carData.price }} </b-card-text>
-
         <b-button to="/" variant="primary">Back to homepage</b-button>
       </b-card>
     </div>

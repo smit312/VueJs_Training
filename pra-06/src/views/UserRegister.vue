@@ -100,7 +100,7 @@
           </ValidationProvider>
           <ValidationProvider rules="required" name="role" v-slot="{ errors }">
             <b-form-group label="Role" class="mb-2">
-              <b-form-select  
+              <b-form-select
                 v-model="form.selectedrole"
                 :options="form.roleoptions"
               ></b-form-select>

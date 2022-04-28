@@ -14,8 +14,10 @@ export default {
   components: { NavBar },
 };
 </script>
+
 <style>
 @import "vue2-animate/dist/vue2-animate.min.css";
 </style>
+
 
 

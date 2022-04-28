@@ -52,4 +52,3 @@ export default {
 <style>
 @import "animate.css";
 </style>
-

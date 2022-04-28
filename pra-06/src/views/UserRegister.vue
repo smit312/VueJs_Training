@@ -100,7 +100,7 @@
           </ValidationProvider>
           <ValidationProvider rules="required" name="role" v-slot="{ errors }">
             <b-form-group label="Role" class="mb-2">
-              <b-form-select
+              <b-form-select  
                 v-model="form.selectedrole"
                 :options="form.roleoptions"
               ></b-form-select>
@@ -156,7 +156,13 @@
               </b-form-invalid-feedback>
             </b-form-group>
           </ValidationProvider>
-          <b-button type="submit" variant="primary">Register</b-button>
+          <b-button
+            type="submit"
+            pill
+            style="background-color: #1f2a48"
+            variant="outline-light"
+            >Register</b-button
+          >
         </center>
       </b-form>
     </ValidationObserver>

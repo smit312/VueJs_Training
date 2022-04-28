@@ -32,6 +32,8 @@ export default {
       <b-card-text class="mt-4 mb-5">{{ cardetails }}</b-card-text>
       <b-button
         style="background-color: #1f2a48"
+        variant="outline-light"
+        pill
         class="
           shadow-lg
           border-none
@@ -51,6 +53,8 @@ export default {
       </b-button>
       <b-button
         style="background-color: #1f2a48"
+        variant="outline-light"
+        pill
         class="
           shadow-lg
           border-none
@@ -65,6 +69,8 @@ export default {
       </b-button>
       <b-button
         style="background-color: #1f2a48"
+        variant="outline-light"
+        pill
         class="
           shadow-lg
           border-none
@@ -80,6 +86,8 @@ export default {
         available soon...
       </b-button>
       <b-button
+        variant="outline-light"
+        pill
         style="background-color: #1f2a48"
         v-b-modal.modal-prevent-closing
         class="shadow-lg border-none position-absolute bottom-0 end-0 mb-3 me-2"

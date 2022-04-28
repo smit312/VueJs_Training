@@ -1,12 +1,14 @@
 <template>
   <div>
-    <transition name="rotate">
+    <transition name="fade">
       <b-modal
         id="modal-prevent-closing"
         ref="modal"
         title="Enter car Detail"
         hide-footer="true"
+        @shown="onShowModal"
         @hide="onHideHandler"
+        no-fade
       >
         <CarForm
           modalId="modal-prevent-closing"
@@ -39,9 +41,15 @@ export default {
         carImage: "",
       };
     },
+    onShowModal() {
+      let m = document.getElementById("modal-prevent-closing");
+      m.classList.add("slideInUp");
+      m.classList.add("animated");
+    },
   },
 };
 </script>
 <style>
-@import "vue2-animate/dist/vue2-animate.min.css";
+@import "animate.css";
 </style>
+

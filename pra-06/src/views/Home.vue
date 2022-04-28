@@ -14,7 +14,7 @@
         :content="this.errmsg"
       />
     </div>
-    <b-row class>
+    <b-row>
       <GalleryCard
         v-for="car in cars"
         :key="car.id"
@@ -27,11 +27,12 @@
         @editCard="editCard(car)"
         @deleteCard="deleteCard(car)"
       />
-
-      <FormModal
-        :formData="selectedCardData"
-        @submittedFormData="handleSubmittedData"
-      />
+      <transition name="bounce">
+        <FormModal
+          :formData="selectedCardData"
+          @submittedFormData="handleSubmittedData"
+        />
+      </transition>
     </b-row>
   </div>
 </template>

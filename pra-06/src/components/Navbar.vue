@@ -10,6 +10,8 @@
         </h1>
         <div class="text-right">
           <b-button
+            variant="outline-light"
+            pill
             v-b-modal.modal-prevent-closing
             style="background-color: #1f2a48"
             class="shadow-lg border-none bottom-0 start-0 ms-5"
@@ -17,6 +19,8 @@
           >
           <router-link to="/">
             <b-button
+              variant="outline-light"
+              pill
               style="background-color: #1f2a48"
               class="shadow-lg border-none bottom-0 start-0 ms-5"
               >Home
@@ -24,6 +28,8 @@
           >
           <router-link to="/login">
             <b-button
+              variant="outline-light"
+              pill
               style="background-color: #1f2a48"
               class="shadow-lg border-none bottom-0 start-0 ms-5"
               >Login
@@ -31,6 +37,8 @@
           >
           <router-link to="/register">
             <b-button
+              variant="outline-light"
+              pill
               style="background-color: #1f2a48"
               class="shadow-lg border-none bottom-0 start-0 ms-5"
               >Register

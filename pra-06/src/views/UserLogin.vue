@@ -46,7 +46,13 @@
             </b-form-group>
           </ValidationProvider>
 
-          <b-button type="submit" variant="primary">Login</b-button>
+          <b-button
+            pill
+            style="background-color: #1f2a48"
+            variant="outline-light"
+            type="submit"
+            >Login</b-button
+          >
         </center>
       </b-form>
     </ValidationObserver>

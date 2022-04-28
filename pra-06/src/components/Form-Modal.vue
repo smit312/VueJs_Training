@@ -4,6 +4,7 @@
       <b-modal
         id="modal-prevent-closing"
         ref="modal"
+        modal-class="hidden"
         title="Enter car Detail"
         hide-footer="true"
         @shown="onShowModal"
@@ -43,6 +44,7 @@ export default {
     },
     onShowModal() {
       let m = document.getElementById("modal-prevent-closing");
+      m.classList.remove("hidden");
       m.classList.add("slideInUp");
       m.classList.add("animated");
     },
@@ -51,4 +53,7 @@ export default {
 </script>
 <style>
 @import "animate.css";
+.hidden {
+  display: none !important;
+}
 </style>

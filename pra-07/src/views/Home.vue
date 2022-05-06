@@ -87,7 +87,12 @@ export default {
       this.$bvModal.show("modal-prevent-closing");
     },
     async deleteCard(data) {
-      await this.deleteCarData(data);
+      let res = await this.$store.dispatch("cars/deleteCarData", data.id);
+      if (res === "success") {
+        this.successmsg = "car data delete successfully";
+      } else {
+        this.errmsg = "oops! somthing went wrong";
+      }
       await this.getData();
     },
     async handleSubmittedData(carItem) {
@@ -104,14 +109,12 @@ export default {
       if (res === "success") {
         this.successmsg = "car data added successfully using action";
       } else {
-        console.log(res);
         this.errmsg = "oops! somthing went wrong";
       }
     },
     async getData() {
       let res = await this.$store.dispatch("cars/getCarsData");
       if (res !== "success") {
-        console.log(res);
         this.errmsg = "oops! somthing went wrong";
       }
     },
@@ -128,28 +131,15 @@ export default {
     },
     async updateCarData(data) {
       let res = await this.$store.dispatch("cars/updateCar", data);
-      console.log(data);
-      if (res === "success") {
+      if (res === "sucess") {
         this.successmsg = "car data updated successfully";
       } else {
-        console.log(res);
-        this.errmsg = "oops! somthing went wrong";
-      }
-    },
-    async deleteCarData(data) {
-      console.log(data);
-      let res = await this.$store.dispatch("cars/deleteCarData", data.id);
-      if (res === "success") {
-        this.successmsg = "car data delete successfully";
-      } else {
-        console.log(res);
         this.errmsg = "oops! somthing went wrong";
       }
     },
   },
   async mounted() {
     this.getData();
-    console.log(this.$store.state.cars.cars);
   },
 };
 </script>

@@ -67,7 +67,7 @@
         <b-form-group
           label="Price"
           label-for="Price"
-          invalid-feedback="Name is required"
+          invalid-feedback="Price is required"
           :state="nameState"
           slot-scope="{ valid, errors }"
         >

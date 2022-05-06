@@ -15,7 +15,6 @@ const mutations = {
 };
 const actions = {
   addCar({ commit }, data) {
-    console.log("add car api called");
     let carData = {
       name: data.carName,
       details: data.carDetails,
@@ -25,19 +24,17 @@ const actions = {
     return axios
       .post("https://testapi.io/api/dartya/resource/cardata", carData)
       .then((res) => {
-        console.log(res);
-        console.log(data);
         if (res && res.data) {
           {
             commit("ADD_CAR", carData);
             return "success";
           }
         } else {
-          return "Oops,Something went wrong!";
+          return "Oops, car data is not added please try again";
         }
       })
       .catch(() => {
-        return "Oops,Something went wrong!";
+        return "Oops, car data is not added please try again";
       });
   },
 };

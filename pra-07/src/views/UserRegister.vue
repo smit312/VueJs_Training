@@ -208,11 +208,10 @@ export default {
       this.userRegister(this.form);
     },
     async userRegister(form) {
-      let res = await this.$store.dispatch("register/registerUser", form);
+      let res = await this.$store.dispatch("auth/registerUser", form);
       if (res === "success") {
         this.$router.push({ name: "home" });
       } else {
-        console.log(res);
         this.errmsg = "oops! somthing went wrong";
       }
     },

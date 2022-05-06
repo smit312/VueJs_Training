@@ -1,7 +1,5 @@
 import axios from "axios";
-// import users from "../users";
 
-// local state
 const state = {
   cars: [],
   carData: "",
@@ -38,11 +36,11 @@ const actions = {
           commit("SET_CARS", res.data.data);
           return "success";
         } else {
-          return "Oops,Something went wrong!";
+          return "Oops, data not found";
         }
       })
       .catch(() => {
-        return "Oops,Something went wrong!";
+        return "Oops, data not found";
       });
   },
   updateCar({ commit }, data) {
@@ -52,31 +50,26 @@ const actions = {
       image: data.carImgURL,
       price: data.carPrice,
     };
-    console.log("Update car data called via action");
     return axios
       .put(
         `https://testapi.io/api/dartya/resource/cardata/${data.carId}`,
         cData
       )
       .then((res) => {
-        console.log(res);
-        console.log(data);
         if (res && res.data) {
           {
             commit("UPDATE_CAR", cData);
-            return "success";
+            return "sucess";
           }
         } else {
-          return "Oops,Something went wrong!";
+          return "No data found!";
         }
       })
       .catch(() => {
-        return "Oops,Something went wrong!";
+        return "Oops, data not found";
       });
   },
   getCarData({ commit }, id) {
-    console.log("get car data api called form the action");
-    console.log("action id is :", id);
     return axios
       .get(`https://testapi.io/api/dartya/resource/cardata/${id}`)
       .then((res) => {
@@ -84,28 +77,25 @@ const actions = {
           commit("SET_CAR", res.data);
           return "success";
         } else {
-          return "Oops,Something went wrong!";
+          return "Oops, data not found";
         }
       })
       .catch(() => {
-        return "Oops,Something went wrong!";
+        return "Oops, data not found";
       });
   },
   deleteCarData(_, id) {
-    console.log("delete car data api called form the action");
-    console.log("action id is :", id);
     return axios
       .delete(`https://testapi.io/api/dartya/resource/cardata/${id}`)
       .then((res) => {
-        console.log(res);
         if (res) {
           return "success";
         } else {
-          return "Oops,Something went wrong!";
+          return "Oops, data deletation unsuccessful";
         }
       })
       .catch(() => {
-        return "Oops,Something went wrong!";
+        return "Oops, data deletation unsuccessful";
       });
   },
 };

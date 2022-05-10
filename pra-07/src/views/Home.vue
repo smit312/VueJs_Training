@@ -105,11 +105,11 @@ export default {
       }
     },
     async addcarData(data) {
-      let res = await this.$store.dispatch("addcar/addCar", data);
+      let res = await this.$store.dispatch("cars/addCar", data);
       if (res === "success") {
-        this.successmsg = "car data added successfully using action";
+        this.successmsg = res;
       } else {
-        this.errmsg = "oops! somthing went wrong";
+        this.errmsg = res;
       }
     },
     async getData() {

@@ -18,16 +18,41 @@ const mutations = {
   SET_CARS(state, cars) {
     state.cars = cars;
   },
-  UPDATE_CAR(state, car) {
-    state.car = car;
+  // UPDATE_CAR(state, cars) {
+  //   state.cars = cars;
+  // },
+  SET_CAR(state, cars) {
+    state.carData = cars;
   },
-  SET_CAR(state, car) {
-    state.carData = car;
-  },
+  // ADD_CAR(state, cars) {
+  //   state.cars = cars;
+  // },
 };
 
 const actions = {
-  // first param is context object
+  addCar({ commit }, data) {
+    let carData = {
+      name: data.carName,
+      details: data.carDetails,
+      image: data.carImgURL,
+      price: data.carPrice,
+    };
+    return axios
+      .post("https://testapi.io/api/dartya/resource/cardata", carData)
+      .then((res) => {
+        if (res && res.data) {
+          {
+            commit("SET_CARS", carData);
+            return "success";
+          }
+        } else {
+          return "Oops, car data is not added please try again";
+        }
+      })
+      .catch(() => {
+        return "Oops, car data is not added please try again";
+      });
+  },
   getCarsData({ commit }) {
     return axios
       .get(`https://testapi.io/api/dartya/resource/cardata`)
@@ -58,7 +83,7 @@ const actions = {
       .then((res) => {
         if (res && res.data) {
           {
-            commit("UPDATE_CAR", cData);
+            commit("SET_CARS", cData);
             return "sucess";
           }
         } else {

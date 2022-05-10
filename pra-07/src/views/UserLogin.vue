@@ -88,11 +88,6 @@ export default {
       successmsg: "",
     };
   },
-  // mounted() {
-  //   if (this.$store.state.auth.users !== null) {
-  //     console.log("mounted called");
-  //   }
-  // },
   methods: {
     async onSubmit(event) {
       event.preventDefault();
@@ -100,7 +95,7 @@ export default {
       if (res === "success") {
         this.$router.push({ name: "home" });
       } else {
-        this.errmsg = "oops! somthing went wrong";
+        this.errmsg = res;
       }
     },
   },

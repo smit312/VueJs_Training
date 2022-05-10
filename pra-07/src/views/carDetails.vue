@@ -100,7 +100,7 @@ export default {
         this.isLoading = false;
       } else {
         this.isLoading = false;
-        this.errmsg = "oops! somthing went wrong";
+        this.errmsg = res;
       }
     },
     async handleSubmittedData(carItem) {
@@ -124,9 +124,9 @@ export default {
     async updateCarData(data) {
       let res = await this.$store.dispatch("cars/updateCar", data);
       if (res === "sucess") {
-        this.successmsg = "car data updated successfully";
+        this.successmsg = res;
       } else {
-        this.errmsg = "oops! somthing went wrong";
+        this.errmsg = res;
       }
     },
     async deleteCard() {
@@ -135,10 +135,10 @@ export default {
         this.$store.state.cars.carData.id
       );
       if (res === "success") {
-        this.successmsg = "car data delete successfully";
+        this.successmsg = res;
         this.$router.push({ name: "home" });
       } else {
-        this.errmsg = "oops! somthing went wrong";
+        this.errmsg = res;
       }
       await this.getCarData(this.$store.state.cars.carData.id);
     },

@@ -212,7 +212,7 @@ export default {
       if (res === "success") {
         this.$router.push({ name: "home" });
       } else {
-        this.errmsg = "oops! somthing went wrong";
+        this.errmsg = res;
       }
     },
   },

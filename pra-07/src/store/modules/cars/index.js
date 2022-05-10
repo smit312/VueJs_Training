@@ -10,7 +10,7 @@ const getters = {
     return state.cars;
   },
   updateCar: (state) => {
-    return state.car;
+    return state.cars;
   },
 };
 
@@ -18,15 +18,10 @@ const mutations = {
   SET_CARS(state, cars) {
     state.cars = cars;
   },
-  // UPDATE_CAR(state, cars) {
-  //   state.cars = cars;
-  // },
+
   SET_CAR(state, cars) {
     state.carData = cars;
   },
-  // ADD_CAR(state, cars) {
-  //   state.cars = cars;
-  // },
 };
 
 const actions = {

@@ -89,9 +89,9 @@ export default {
     async deleteCard(data) {
       let res = await this.$store.dispatch("cars/deleteCarData", data.id);
       if (res === "success") {
-        this.successmsg = "car data delete successfully";
+        this.successmsg = res;
       } else {
-        this.errmsg = "oops! somthing went wrong";
+        this.errmsg = res;
       }
       await this.getData();
     },
@@ -115,7 +115,7 @@ export default {
     async getData() {
       let res = await this.$store.dispatch("cars/getCarsData");
       if (res !== "success") {
-        this.errmsg = "oops! somthing went wrong";
+        this.errmsg = res;
       }
     },
     formatFetchedData(data) {
@@ -132,9 +132,9 @@ export default {
     async updateCarData(data) {
       let res = await this.$store.dispatch("cars/updateCar", data);
       if (res === "sucess") {
-        this.successmsg = "car data updated successfully";
+        this.successmsg = res;
       } else {
-        this.errmsg = "oops! somthing went wrong";
+        this.errmsg = res;
       }
     },
   },

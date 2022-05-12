@@ -14,24 +14,28 @@
             pill
             v-b-modal.modal-prevent-closing
             style="background-color: #1f2a48"
+            v-if="this.isAuth"
             class="shadow-lg border-none bottom-0 start-0 ms-5"
             >Add Car</b-button
           >
+
           <router-link to="/">
             <b-button
               variant="outline-light"
               pill
               style="background-color: #1f2a48"
               class="shadow-lg border-none bottom-0 start-0 ms-5"
+              v-if="this.isAuth"
               >Home
-            </b-button></router-link
-          >
-          <router-link to="/login">
+            </b-button>
+          </router-link>
+          <router-link :to="{ name: 'userlogin' }">
             <b-button
               variant="outline-light"
               pill
               style="background-color: #1f2a48"
               class="shadow-lg border-none bottom-0 start-0 ms-5"
+              v-if="!this.isAuth"
               >Login
             </b-button></router-link
           >
@@ -41,9 +45,23 @@
               pill
               style="background-color: #1f2a48"
               class="shadow-lg border-none bottom-0 start-0 ms-5"
+              v-if="!this.isAuth"
               >Register
             </b-button></router-link
           >
+
+          <b-dropdown
+            id="dropdown-right"
+            pill
+            style="background-color: #1f2a48"
+            class="shadow-lg border-none bottom-0 start-0 ms-5"
+            :text="this.userData.email"
+            v-if="this.isAuth"
+          >
+            <b-dropdown-item @click.prevent="logoutHandler"
+              >Logout</b-dropdown-item
+            >
+          </b-dropdown>
         </div>
       </div>
     </div>
@@ -58,6 +76,19 @@ export default {
       showRoomName: "Car Showroom",
     };
   },
+  computed: {
+    isAuth() {
+      return this.$store.getters["auth/getisAuth"];
+    },
+    userData() {
+      return this.$store.getters["auth/getUser"];
+    },
+  },
+  methods: {
+    logoutHandler() {
+      console.log("logout called");
+      this.$store.dispatch("auth/UserLogout");
+    },
+  },
 };
 </script>
-

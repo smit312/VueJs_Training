@@ -1,42 +1,59 @@
+import router from "@/router";
 import axios from "axios";
+import jwt_decode from "jwt-decode";
 const state = {
   user: null,
+  login: false,
+  isAuth: false,
+  userData: {
+    email: "",
+    password: "",
+  },
 };
 
 const getters = {
   authUser: (state) => {
     return state.user;
   },
+  getisAuth: (state) => {
+    return state.isAuth;
+  },
+  getUser: (state) => {
+    return state.userData;
+  },
 };
 
 const mutations = {
+  setUserData(state, data) {
+    state.userData = data;
+  },
+
   AUTH_USER(state, user) {
     state.user = user;
+  },
+  isAuth(state, status) {
+    state.isAuth = status;
   },
 };
 
 const actions = {
   // first param is context object
-  loginUser({ commit }, data) {
-    return axios
-      .get("https://testapi.io/api/dartya/resource/users/1")
+  async loginUser({ commit }, data) {
+    await axios
+      .post("http://localhost:8080/api", {
+        email: data.uEmail,
+        password: data.uPassword,
+      })
       .then((res) => {
-        if (res && res.data) {
-          if (
-            data.uEmail === res.data.email &&
-            data.uPassword === res.data.password
-          ) {
-            commit("AUTH_USER", data);
-            return "success";
-          } else {
-            return "Invalid Credentials!";
-          }
-        } else {
-          return "Invalid Credentials!";
+        if (res.status === 200) {
+          commit("isAuth", true);
+          router.push({ name: "home" });
+          let userData = jwt_decode(window.$cookies.get("authUser"));
+          commit("setUserData", userData);
         }
       })
-      .catch(() => {
-        return "Oops,Something went wrong!";
+      .catch((err) => {
+        console.log(err);
       });
   },
   registerUser({ commit }, form) {
@@ -58,12 +75,17 @@ const actions = {
             return "success";
           }
         } else {
-          return "Oops,car data not updated please try again";
+          return "Oops,somthing went wrong please try again";
         }
       })
       .catch(() => {
-        return "Oops,car data not updated please try again";
+        return "Oops,somthing went wrong please try again";
       });
+  },
+  UserLogout({ commit }) {
+    window.$cookies.remove("authUser");
+    commit("isAuth", false);
+    router.replace({ name: "userlogin" });
   },
 };
 

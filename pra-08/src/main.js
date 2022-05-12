@@ -14,6 +14,7 @@ import {
 } from "vee-validate";
 import en from "vee-validate/dist/locale/en.json";
 import * as rules from "vee-validate/dist/rules";
+Vue.use(require("vue-cookies"));
 Vue.use(BootstrapVue);
 Vue.use(BootstrapVueIcons);
 Object.keys(rules).forEach((rule) => {
@@ -24,6 +25,7 @@ localize("en", en);
 
 Vue.component("ValidationProvider", ValidationProvider);
 Vue.component("ValidationObserver", ValidationObserver);
+
 new Vue({
   router,
   store,

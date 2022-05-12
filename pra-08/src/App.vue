@@ -2,7 +2,7 @@
   <div id="app">
     <NavBar />
     <transition name="bounce">
-      <router-view />
+      <router-view apper :key="$router.path" />
     </transition>
   </div>
 </template>
@@ -12,6 +12,9 @@ import NavBar from "./components/Navbar.vue";
 export default {
   name: "App",
   components: { NavBar },
+  mounted() {
+    this.$store.dispatch("auth/getisAuth");
+  },
 };
 </script>
 

@@ -88,15 +88,15 @@ export default {
       successmsg: "",
     };
   },
+
   methods: {
     async onSubmit(event) {
       event.preventDefault();
-      let res = await this.$store.dispatch("auth/loginUser", this.form);
-      if (res === "success") {
-        this.$router.push({ name: "home" });
-      } else {
-        this.errmsg = res;
-      }
+      await this.$store.dispatch("auth/loginUser", this.form);
+      this.form = {
+        uEmail: "",
+        uPassword: "",
+      };
     },
   },
 };

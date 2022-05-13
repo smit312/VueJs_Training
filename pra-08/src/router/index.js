@@ -7,7 +7,6 @@ import carDetails from "../views/carDetails.vue";
 import jwt_decode from "jwt-decode";
 import store from "@/store";
 Vue.use(VueRouter);
-
 const routes = [
   {
     path: "/",
@@ -44,7 +43,6 @@ router.beforeEach((to, from, next) => {
     userData = jwt_decode(window.$cookies.get("authUser"));
     store.commit("auth/setUserData", userData);
   }
-  // if (to.name === "userregister" && !isAuth) next();
   if (to.name !== "userlogin" && to.name !== "userregister" && !isAuth)
     next({ name: "userlogin" });
   else if ((to.name === "userlogin" || to.name === "userregister") && isAuth) {

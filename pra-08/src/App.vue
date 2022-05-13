@@ -13,7 +13,11 @@ export default {
   name: "App",
   components: { NavBar },
   mounted() {
-    this.$store.dispatch("auth/getisAuth");
+    if (this.$cookies.get("authUser")) {
+      this.$store.commit("auth/isAuth", true);
+    } else {
+      this.$store.commit("auth/isAuth", false);
+    }
   },
 };
 </script>

@@ -86,7 +86,6 @@ export default {
   },
   methods: {
     logoutHandler() {
-      console.log("logout called");
       this.$store.dispatch("auth/UserLogout");
     },
   },

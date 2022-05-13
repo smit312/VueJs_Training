@@ -92,6 +92,11 @@ export default {
       successmsg: "",
     };
   },
+  computed: {
+    cData() {
+      return this.$store.getters["cars/getCar"];
+    },
+  },
   methods: {
     async getCarData(id) {
       this.isLoading = true;
@@ -130,17 +135,14 @@ export default {
       }
     },
     async deleteCard() {
-      let res = await this.$store.dispatch(
-        "cars/deleteCarData",
-        this.$store.state.cars.carData.id
-      );
+      let res = await this.$store.dispatch("cars/deleteCarData", this.cData);
       if (res === "success") {
         this.successmsg = res;
         this.$router.push({ name: "home" });
+        this.$store.dispatch("cars/getCar");
       } else {
         this.errmsg = res;
       }
-      await this.getCarData(this.$store.state.cars.carData.id);
     },
   },
   created() {

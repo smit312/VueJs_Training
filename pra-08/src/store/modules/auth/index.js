@@ -28,7 +28,7 @@ const mutations = {
     state.userData = data;
   },
 
-  AUTH_USER(state, user) {
+  authUser(state, user) {
     state.user = user;
   },
   isAuth(state, status) {
@@ -71,7 +71,7 @@ const actions = {
       .then((res) => {
         if (res && res.data) {
           {
-            commit("AUTH_USER", uDetails);
+            commit("authUser", uDetails);
             return "success";
           }
         } else {

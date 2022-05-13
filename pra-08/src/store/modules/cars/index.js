@@ -2,7 +2,7 @@ import axios from "axios";
 
 const state = {
   cars: [],
-  carData: "",
+  carData: [],
 };
 
 const getters = {
@@ -11,6 +11,9 @@ const getters = {
   },
   updateCar: (state) => {
     return state.cars;
+  },
+  getCar: (state) => {
+    return state.carData;
   },
 };
 

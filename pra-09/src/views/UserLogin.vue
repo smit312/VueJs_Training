@@ -21,7 +21,7 @@
           <ValidationProvider
             rules="required|email"
             name="uEmail"
-            v-slot="{ errors }"
+            v-slot="{ errors, valid }"
           >
             <b-form-group label="email" class="mb-2">
               <b-form-input
@@ -43,7 +43,7 @@
               regex: /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,12}$/,
             }"
             name="uPassword"
-            v-slot="{ errors }"
+            v-slot="{ errors, valid }"
           >
             <b-form-group label="password" class="mb-2">
               <b-form-input

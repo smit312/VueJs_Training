@@ -40,7 +40,7 @@ const actions = {
   // first param is context object
   async loginUser({ commit }, data) {
     await axios
-      .post("http://localhost:8080/api", {
+      .post("https://vue-project-97158.web.app/api", {
         email: data.uEmail,
         password: data.uPassword,
       })

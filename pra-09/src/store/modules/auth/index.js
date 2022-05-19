@@ -40,7 +40,8 @@ const actions = {
   // first param is context object
   async loginUser({ commit }, data) {
     await axios
-      .post("https://vue-project-97158.web.app/api", {
+      // .post("https://vue-project-97158.web.app/api", {
+      .post("https://zippy-pony-17f4ae.netlify.app/api", {
         email: data.uEmail,
         password: data.uPassword,
       })

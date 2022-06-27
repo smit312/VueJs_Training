@@ -3,7 +3,6 @@ import axios from "axios";
 import jwt_decode from "jwt-decode";
 const state = {
   user: null,
-  login: false,
   isAuth: false,
   userData: {
     email: "",

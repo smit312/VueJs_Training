@@ -6,15 +6,9 @@
       <v-spacer></v-spacer>
 
       <v-btn plain v-if="this.isAuth" @click="openModal">Add Car</v-btn>
-
       <v-btn plain v-if="this.isAuth">Home</v-btn>
-      <router-link to="/login">
-        <v-btn plain v-if="!this.isAuth"> Login</v-btn>
-      </router-link>
-      <router-link to="/register">
-        <v-btn plain v-if="!this.isAuth"> Register</v-btn>
-      </router-link>
-
+      <v-btn plain v-if="!this.isAuth" to="/login"> Login</v-btn>
+      <v-btn plain v-if="!this.isAuth" to="/register"> Register</v-btn>
       <v-btn plain v-if="this.isAuth" @click.prevent="logoutHandler">
         Logout</v-btn
       >
@@ -44,7 +38,6 @@ export default {
       this.$store.commit("ui/openDialog", { type: "add" });
     },
     logoutHandler() {
-      console.log("logout called");
       this.$store.dispatch("auth/UserLogout");
     },
   },

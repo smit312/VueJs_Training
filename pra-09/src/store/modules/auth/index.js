@@ -3,7 +3,6 @@ import axios from "axios";
 import jwt_decode from "jwt-decode";
 const state = {
   user: null,
-  login: false,
   isAuth: false,
   userData: {
     email: "",
@@ -53,8 +52,8 @@ const actions = {
           commit("setUserData", userData);
         }
       })
-      .catch((err) => {
-        console.log(err);
+      .catch(() => {
+        return "Oops,somthing went wrong please try again";
       });
   },
   registerUser({ commit }, form) {

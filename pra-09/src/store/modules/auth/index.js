@@ -40,7 +40,7 @@ const actions = {
   async loginUser({ commit }, data) {
     await axios
       // .post("https://vue-project-97158.web.app/api", {
-      .post("https://zippy-pony-17f4ae.netlify.app/api", {
+      .post("http://localhost:8080/api", {
         email: data.uEmail,
         password: data.uPassword,
       })

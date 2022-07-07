@@ -1,0 +1,20 @@
+{
+  "AlertBox": {
+    "description": "Auto imported from components/AlertBox.vue"
+  },
+  "CarForm": {
+    "description": "Auto imported from components/CarForm.vue"
+  },
+  "FormModal": {
+    "description": "Auto imported from components/Form-Modal.vue"
+  },
+  "GalleryCard": {
+    "description": "Auto imported from components/GalleryCard.vue"
+  },
+  "Navbar": {
+    "description": "Auto imported from components/Navbar.vue"
+  },
+  "NuxtLogo": {
+    "description": "Auto imported from components/NuxtLogo.vue"
+  }
+}
